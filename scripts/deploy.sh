@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REPOSITORY=/home/ec2-user/app/step2
-PROJECT_NAME=freelec-springboot2-webservice
+PROJECT_NAME=NeedsCatcher
 
 echo "> build 파일복사"
 
@@ -9,7 +9,7 @@ cp $REPOSITORY/zip/*.jar $REPOSITORY/
 
 echo "> 현재 구동 중인 애플리케이션 pid 확인"
 
-CURRENT_PID=$(pgrep -fl freelec-springboot2-webservice | grep jar | awk '{print $1')
+CURRENT_PID=$(pgrep -fl NeedsCatcher | grep jar | awk {'print $1'})
 
 echo "현재 구동 중인 애플리케이션 pid : $CURRENT_PID"
 
@@ -34,6 +34,6 @@ chmod +x $JAR_NAME
 echo "> $JAR_NAME 실행"
 
 nohub java -jar \
-    -Dspring.config.location=classpath:/application.proerties,classpath:/application-real.proerties,/home/ec2-user/app/application-oauth.proerties,/home/ec2-user/app/application-real-db.proerties \
+    -Dspring.config.location=classpath:/application.properties,classpath:/application-real.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
     -Dspring.profiles.active=real \
     $JAR_NAME > $REPOSITORY/nohub.out 2>&1 &
